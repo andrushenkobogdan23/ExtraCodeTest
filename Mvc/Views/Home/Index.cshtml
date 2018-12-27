@@ -1,0 +1,80 @@
+﻿@model MVC.Models.Home.IndexModel
+
+@{
+    ViewData["Title"] = Localizer["My todos"];
+    var hasItems = Model.Items.Count() > 0;
+    var subTitle = Localizer.Plural(@Model.Items.Count(), "There is one todo", "There is {0} todo").Value;
+    //var hasMoreThanOne = hasItems && Model.Items.Count() > 1;
+}
+
+<pagetitle ss-hide="!hasItems" ss-subtitle="@subTitle">
+    <div class="float-right">
+        <a asp-action="Create" class="btn btn-outline-success">@Localizer["Create new todo"]</a>
+    </div>
+    @Localizer["My todos"]
+</pagetitle>
+
+<pagetitle ss-hide="hasItems">
+    <div class="float-right">
+        <a asp-action="Create" class="btn btn-outline-success">@Localizer["Create new todo"]</a>
+    </div>
+    @Localizer["There is no registered todo"]
+</pagetitle>
+
+<div class="row">
+    <div class="col-12 col-lg-4">
+        <form method="post" asp-action="Index" asp-controller="Home">
+            <div class="form-group">
+                <label for="PerformerId" class="control-label">@Localizer["Completed by"]</label>
+                <select class="custom-select" ss-items="Model.Users" name="PerformerId" id="PerformerId"></select>
+            </div>
+            @{
+                await Html.RenderPartialAsync("BaseFilterView", Model);
+            }
+        </form>
+    </div>
+
+    <div class="col-12 col-lg-8">
+        <table class="table">
+            <caption>@Localizer["Found todos"]: @Model.Items.Count()</caption>
+            <thead>
+                <tr>
+                <th>@Localizer["Title"]</th>
+                <th>@Localizer["Create date"]</th>
+                <th>@Localizer["Estimated cost"]</th>
+                <th>@Localizer["Priority"]</th>
+                <th>@Localizer["Performer"]</th>
+                <th>@Localizer["Complete date"]</th>
+                <th>@Localizer["Final cost"]</th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td><a asp-action="Details" asp-route-id="@item.Id" class="btn-link">@item.Title</a></td>
+                    <td ss-dmy="@item.CreateDate"></td>
+                    <td ss-money="@item.AllEstimatedCost"></td>
+                    <td>@item.Priority</td>
+                    <td>@(item.PerformerId.HasValue ? item.PerformerId.Value.ToString() : "")</td>
+                    <td ss-dmy="@item.CompleteDate"></td>
+                    <td ss-money="@item.AllCost"></td>
+                    <td>
+                        @if (!item.CompleteDate.HasValue)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info">@Localizer["Edit"]</a>
+                            <a asp-action="Finish" asp-route-id="@item.Id" class="btn btn-outline-warning">@Localizer["Finish"]</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">@Localizer["Delete"]</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">@Localizer["Details"]</a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

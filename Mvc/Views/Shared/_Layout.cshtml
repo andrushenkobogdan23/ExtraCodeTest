@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"] - MVC</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <environment include="Development">
+        @*<link rel="stylesheet" href="~/src/css/main.scss" asp-append-version="true" />*@
+        <link rel="stylesheet" href="~/build/css/main.css" asp-append-version="true" />
+
+    </environment>
+    <environment exclude="Development">
+        @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
+        <link rel="stylesheet" href="~/build/css/main.css" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg fixed-top" role="menubar">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">@Localizer["MVC"]</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                </li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Logout" class="nav-link">@Localizer["Logout"]</a></li>
+                }
+            </ul>
+        </div>
+
+    </nav>
+    
+    <main role="main" class="container-fluid body-content">
+        @RenderBody()
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted d-flex justify-content-center pt-3">&copy; 2018 - MVC frontend template</span>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/build/js/main.js"></script>
+    </environment>
+
+    <environment exclude="Development">
+        <script src="~/build/js/main.js"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

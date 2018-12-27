@@ -1,0 +1,36 @@
+﻿// Переопределение дефолтных значений переменных Bootstrap 4 и определение своих
+@import "variables.scss";
+
+// Подключение нужных SCSS исходников Bootstrap 4
+@import "../../../bower_components/bootstrap/scss/_functions.scss";
+@import "../../../bower_components/bootstrap/scss/_variables.scss";
+@import "../../../bower_components/bootstrap/scss/_mixins.scss";
+@import "../../../bower_components/bootstrap/scss/_reboot.scss";
+@import "../../../bower_components/bootstrap/scss/_type.scss";
+@import "../../../bower_components/bootstrap/scss/_images.scss";
+@import "../../../bower_components/bootstrap/scss/_grid.scss";
+@import "../../../bower_components/bootstrap/scss/_tables.scss";
+@import "../../../bower_components/bootstrap/scss/_forms.scss";
+@import "../../../bower_components/bootstrap/scss/_custom-forms.scss";
+@import "../../../bower_components/bootstrap/scss/_buttons.scss";
+@import "../../../bower_components/bootstrap/scss/_transitions.scss";
+@import "../../../bower_components/bootstrap/scss/_dropdown.scss";
+@import "../../../bower_components/bootstrap/scss/_button-group.scss";
+@import "../../../bower_components/bootstrap/scss/_input-group.scss";
+@import "../../../bower_components/bootstrap/scss/_nav.scss";
+@import "../../../bower_components/bootstrap/scss/_navbar.scss";
+@import "../../../bower_components/bootstrap/scss/_card.scss";
+@import "../../../bower_components/bootstrap/scss/_breadcrumb.scss";
+@import "../../../bower_components/bootstrap/scss/_badge.scss";
+@import "../../../bower_components/bootstrap/scss/_alert.scss";
+@import "../../../bower_components/bootstrap/scss/_progress.scss";
+@import "../../../bower_components/bootstrap/scss/_media.scss";
+@import "../../../bower_components/bootstrap/scss/_list-group.scss";
+@import "../../../bower_components/bootstrap/scss/_close.scss";
+@import "../../../bower_components/bootstrap/scss/_modal.scss";
+@import "../../../bower_components/bootstrap/scss/_tooltip.scss";
+@import "../../../bower_components/bootstrap/scss/_popover.scss";
+@import "../../../bower_components/bootstrap/scss/_utilities.scss";
+
+// Подключение своих SCSS файлов
+@import "my.scss";

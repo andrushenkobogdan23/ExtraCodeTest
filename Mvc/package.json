@@ -1,0 +1,30 @@
+{
+  "version": "1.1.0",
+  "name": "SelfService.Frontend",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.23.7",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-cache": "^1.0.2",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-concat": "2.6.0",
+    "gulp-cssmin": "0.1.7",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rigger": "^0.5.8",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^2.1.2",
+    "imagemin-jpeg-recompress": "^5.1.0",
+    "imagemin-pngquant": "^5.1.0",
+    "rimraf": "2.5.4"
+  },
+  "dependencies": {
+    "buffer-js": "0.0.3",
+    "node": "^10.0.0",
+    "npm": "^6.0.0",
+    "source-map": "^0.7.2"
+  }
+}

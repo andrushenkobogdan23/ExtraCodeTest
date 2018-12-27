@@ -1,0 +1,88 @@
+﻿@model TodoServices.Shared.Dto.TodoInfo
+
+@{
+    ViewData["Title"] = Localizer["Delete todo"];
+}
+
+<pagetitle>@Localizer["Delete todo"]</pagetitle>
+
+<h3>@Localizer["Are you sure you want to delete this?"]</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Localizer["Author"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorId)
+        </dd>
+        <dt>
+            @Localizer["Performer"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PerformerId)
+        </dd>
+        <dt>
+            @Localizer["Estimated cost"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedCost)
+        </dd>
+        <dt>
+            @Localizer["Priority"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+        <dt>
+            @Localizer["Title"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Localizer["Description"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Localizer["Create date"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Localizer["Complete date"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompleteDate)
+        </dd>
+        <dt>
+            @Localizer["Final cost"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+    </dl>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="AuthorId" type="hidden" />
+        <input asp-for="PerformerId" type="hidden" />
+        <input asp-for="Priority" type="hidden" />
+        <input asp-for="CompleteDate" type="hidden" />
+        <input asp-for="Cost" type="hidden" />
+        <input asp-for="EstimatedCost" type="hidden" />
+        <input asp-for="CreateDate" type="hidden" />
+        <input asp-for="Title" type="hidden" />
+        <input asp-for="Description" type="hidden" />
+        <input name="yes" type="hidden" value="true" />      
+        <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button> |<a asp-route-Id="@Model.ParentId"  asp-action=@(Model.ParentId.HasValue ?"Details":"Index") class="btn-link"> @Localizer["Back to list"]</a>   
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,6 @@
+﻿wwwroot/lib_bower/
+node_modules/
+bin/
+obj/
+bower_components/
+**/*.log

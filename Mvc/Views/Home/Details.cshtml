@@ -1,0 +1,117 @@
+﻿@model TodoServices.Shared.Dto.TodoInfo
+
+@{
+    ViewData["Title"] = Localizer["Todo details"];
+}
+
+<pagetitle>@Localizer["Todo details"]</pagetitle>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PerformerId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PerformerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedCost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedCost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CompleteDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompleteDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+    </dl>
+
+@if (Model.ParentId == null)
+{
+    <table class="table">
+        <caption>@Localizer["Found todos"]: @Model.Childs.Count()</caption>
+        <thead>
+            <tr>
+                <th>@Localizer["Title"]</th>
+                <th>@Localizer["Parent Id"]</th>
+                <th>@Localizer["Create date"]</th>
+                <th>@Localizer["Estimated cost"]</th>
+                <th>@Localizer["Priority"]</th>
+                <th>@Localizer["Performer"]</th>
+                <th>@Localizer["Complete date"]</th>
+                <th>@Localizer["Final cost"]</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Children in Model.Childs)
+            {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@Children.Id" class="btn-link">@Children.Title</a></td>
+                <td>@Model.Title</td>
+                <td ss-dmy="@Children.CreateDate"></td>
+                <td ss-money="@Children.EstimatedCost"></td>
+                <td>@Children.Priority</td>
+                <td>@(Children.PerformerId.HasValue ? Children.PerformerId.Value.ToString() : "")</td>
+                <td ss-dmy="@Children.CompleteDate"></td>
+                <td ss-money="@Children.Cost"></td>
+                <td>
+                    @if (!Children.CompleteDate.HasValue)
+                    {
+                        <a asp-action="Edit" asp-route-id="@Children.Id" class="btn btn-outline-info">@Localizer["Edit"]</a>
+                        <a asp-action="Finish" asp-route-id="@Children.Id" class="btn btn-outline-warning">@Localizer["Finish"]</a>
+                        <a asp-action="Delete" asp-route-id="@Children.Id" class="btn btn-outline-danger">@Localizer["Delete"]</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@Children.Id" class="btn btn-outline-info">@Localizer["Details"]</a>
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+<pagefooter>
+    <a asp-route-Id="@Model.ParentId" asp-action=@(Model.ParentId.HasValue ?"Details":"Index") class="btn-link"> @Localizer["Back to list"]</a>
+</pagefooter>

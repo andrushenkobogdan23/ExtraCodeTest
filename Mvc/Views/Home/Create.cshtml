@@ -1,0 +1,56 @@
+﻿
+@model TodoServices.Shared.Dto.AddTodoCommand
+
+@{   
+    ViewData["Title"] = (Model.ParentId.HasValue ? Localizer["Create Item"] : Localizer["Create todo"]);
+}
+
+<pagetitle>@(Model.ParentId.HasValue ? Localizer["Create Item"] : Localizer["Create todo"])</pagetitle>
+
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input asp-for="ParentId" type="hidden" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label for="EstimatedCost" class="control-label">@Localizer["Estimated cost"]</label>
+                <input asp-for="EstimatedCost" class="form-control" data-val-required="@Localizer["Type estimated cost"]" />
+                <span asp-validation-for="EstimatedCost" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Priority" class="control-label">@Localizer["Priority"]</label>
+                <input asp-for="Priority" class="form-control" data-val-required="@Localizer["Type priority"]" />
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Title" class="control-label">@Localizer["Title"]</label>
+                <input asp-for="Title" class="form-control" data-val-required="@Localizer["Type title"]" data-val="true" data-val-maxlength-max="32" data-val-maxlength="@Localizer["Title should be no more then 32 symbols"]">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Description" class="control-label">@Localizer["Description"]</label>
+                <input asp-for="Description" class="form-control" data-val-required="@Localizer["Type description"]" data-val="true" data-val-length-min="5" data-val-length-max="32" data-val-length="@Localizer["Description should be at least 5 symbols but no more then 32"]">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">@Localizer["Create"]</button> | <a asp-route-Id="@Model.ParentId" asp-action=@(Model.ParentId.HasValue ?"Edit":"Index") class="btn-link"> @Localizer["Back to list"]</a>
+                                                                                                                        
+
+            </div>
+        </form>
+    </div>
+</div>
+
+   
+    
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
